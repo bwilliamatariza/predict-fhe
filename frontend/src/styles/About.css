@@ -1,0 +1,530 @@
+/* ============================================
+   📖 About - 关于页面
+   ============================================ */
+
+.about-container {
+  animation: fadeIn 0.5s ease-out;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+/* ============================================
+   🎨 顶部 Hero 区域
+   ============================================ */
+
+.about-hero {
+  background: white;
+  border-radius: var(--radius-2xl);
+  padding: 5rem 3rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-2xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-purple-blue);
+}
+
+.hero-glow {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: 50%;
+  border: 4px solid rgba(99, 102, 241, 0.2);
+  position: relative;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--gray-600);
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ============================================
+   📝 内容区域
+   ============================================ */
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.about-section {
+  background: white;
+  border-radius: var(--radius-2xl);
+  padding: 2.5rem 3rem;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.about-section:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--gray-100);
+}
+
+.section-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.2));
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-body {
+  color: var(--gray-700);
+}
+
+.section-text {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  margin-bottom: 2rem;
+  color: var(--gray-600);
+}
+
+/* ============================================
+   ✨ 高亮盒子
+   ============================================ */
+
+.highlight-box {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(139, 92, 246, 0.04));
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(99, 102, 241, 0.1);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.highlight-item:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+  border-color: rgba(99, 102, 241, 0.2);
+  transform: translateX(8px);
+}
+
+.highlight-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.highlight-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.highlight-content p {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* ============================================
+   🔧 技术特性
+   ============================================ */
+
+.tech-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tech-feature {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--gray-200);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.tech-feature:hover {
+  border-color: var(--primary-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.tech-number {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: white;
+  background: var(--gradient-purple-blue);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.tech-content h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.tech-content p {
+  font-size: 0.9375rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* ============================================
+   📖 使用步骤
+   ============================================ */
+
+.steps-container {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.step-item {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(139, 92, 246, 0.04));
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(99, 102, 241, 0.1);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.step-item:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+  border-color: var(--primary-300);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-badge {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-purple-blue);
+  border-radius: 50%;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-md);
+}
+
+.step-number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.625rem;
+}
+
+.step-description {
+  font-size: 0.9375rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.step-arrow {
+  font-size: 2rem;
+  color: var(--primary-400);
+  align-self: center;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+/* ============================================
+   🛠️ 技术栈
+   ============================================ */
+
+.tech-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.tech-category {
+  padding: 1.75rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(139, 92, 246, 0.04));
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(99, 102, 241, 0.1);
+}
+
+.category-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.15);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tech-tag {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-700);
+  background: white;
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.tech-tag:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-400);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   📞 底部联系信息
+   ============================================ */
+
+.about-footer {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+  border: 2px solid rgba(99, 102, 241, 0.2);
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.footer-icon {
+  font-size: 2.5rem;
+}
+
+.footer-brand {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: var(--gray-600);
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--primary-700);
+  background: white;
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.footer-link:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-400);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   📱 响应式设计
+   ============================================ */
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 3.5rem 2rem;
+  }
+
+  .hero-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .about-section {
+    padding: 2rem 1.75rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .section-text {
+    font-size: 1rem;
+  }
+
+  .tech-features {
+    grid-template-columns: 1fr;
+  }
+
+  .steps-container {
+    flex-direction: column;
+  }
+
+  .step-arrow {
+    transform: rotate(90deg);
+  }
+
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-link {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .about-section {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .highlight-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .tech-feature {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step-item {
+    padding: 1.5rem 1.25rem;
+  }
+}
+

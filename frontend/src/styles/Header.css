@@ -1,0 +1,409 @@
+/* ============================================
+   🎯 Header - 导航栏
+   ============================================ */
+
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header-container {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* ============================================
+   🎨 Logo 区域
+   ============================================ */
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.header-logo:hover {
+  transform: scale(1.05);
+}
+
+.header-logo-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.3));
+}
+
+.header-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-logo-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.header-logo-subtitle {
+  font-size: 0.75rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   🔗 导航链接
+   ============================================ */
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: var(--gradient-purple-blue);
+  border-radius: 2px;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.nav-link:hover {
+  color: var(--primary-600);
+  background: var(--primary-50);
+}
+
+.nav-link:hover::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link.active {
+  color: var(--primary-600);
+  background: var(--primary-100);
+}
+
+/* ============================================
+   💰 钱包连接区域
+   ============================================ */
+
+.wallet-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 网络状态徽章 */
+.network-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--success-700, #15803d);
+}
+
+.network-badge.wrong-network {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--error-700, #b91c1c);
+}
+
+.network-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 连接按钮 */
+.connect-button {
+  padding: 0.75rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: white;
+  background: var(--gradient-purple-blue);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-normal) var(--ease-out);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.connect-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.connect-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.connect-button:hover {
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.connect-button:active {
+  transform: translateY(0);
+}
+
+.connect-button-icon {
+  font-size: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.connect-button-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* 地址显示 */
+.address-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--primary-100);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.address-container:hover {
+  border-color: var(--primary-300);
+  box-shadow: var(--shadow-md);
+}
+
+.address-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-700);
+}
+
+.wallet-icon {
+  font-size: 1rem;
+}
+
+/* 断开连接按钮 */
+.disconnect-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--error-600);
+  background: white;
+  border: 2px solid var(--error-200);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.disconnect-button:hover {
+  background: var(--error-50);
+  border-color: var(--error-300);
+  color: var(--error-700);
+}
+
+/* 切换网络按钮 */
+.switch-network-button {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--warning-500), var(--warning-600));
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-normal) var(--ease-out);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.switch-network-button:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   🎯 错误提示
+   ============================================ */
+
+.wallet-error {
+  position: fixed;
+  top: 5rem;
+  right: 1.5rem;
+  max-width: 24rem;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-left: 4px solid var(--error-500);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: 2000;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.wallet-error-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--error-700);
+  margin-bottom: 0.25rem;
+}
+
+.wallet-error-message {
+  font-size: 0.8125rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+/* ============================================
+   📱 响应式设计
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .header-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .header-logo-title {
+    font-size: 1.25rem;
+  }
+  
+  .header-logo-subtitle {
+    display: none;
+  }
+  
+  .network-badge {
+    display: none;
+  }
+  
+  .address-badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+  
+  .connect-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .disconnect-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-section {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .address-container {
+    flex-direction: column;
+  }
+  
+  .connect-button,
+  .disconnect-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   🎬 加载状态动画
+   ============================================ */
+
+.connecting-animation {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
