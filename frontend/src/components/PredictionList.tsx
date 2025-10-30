@@ -2,7 +2,7 @@ import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../config/contracts';
 import { useEthersSigner } from '../hooks/useEthersSigner';
 import { useWallet } from '../hooks/useWallet';
 import { ethers } from 'ethers';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import '../styles/PredictionList.css';
 
 type Prediction = {
@@ -20,7 +20,7 @@ type Prediction = {
 };
 
 export function PredictionList() {
-  const { provider, isConnected } = useWallet();
+  const { provider } = useWallet();
   const signer = useEthersSigner();
   const [ethSigner, setEthSigner] = useState<ethers.Signer | null>(null);
   const contract = useMemo(() => {
@@ -37,9 +37,6 @@ export function PredictionList() {
   const [betting, setBetting] = useState<Record<number, boolean>>({});
   const [settling, setSettling] = useState<Record<number, boolean>>({});
   const [unitsMap, setUnitsMap] = useState<Record<number, number>>({});
-  const workerRef = useRef<Worker | null>(null);
-  const reqIdRef = useRef(1);
-  const [workerReady, setWorkerReady] = useState(false);
   const [statusMap, setStatusMap] = useState<Record<number, string>>({});
   const [votedPredictions, setVotedPredictions] = useState<Set<number>>(new Set());
 
