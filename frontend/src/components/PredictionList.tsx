@@ -2,6 +2,7 @@ import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../config/contracts';
 import { useEthersSigner } from '../hooks/useEthersSigner';
 import { useWallet } from '../hooks/useWallet';
 import { ethers } from 'ethers';
+import { SEPOLIA_RPC_URL } from '../config/network';
 import { useEffect, useMemo, useState } from 'react';
 import '../styles/PredictionList.css';
 
@@ -22,6 +23,53 @@ type Prediction = {
 export function PredictionList() {
   const { provider } = useWallet();
   const signer = useEthersSigner();
+  // 将 SDK 可能回退到的公共 Blast 端点列为匹配目标
+  const OVERRIDE_TARGETS = useMemo(
+    () => [
+      'https://eth-sepolia.public.blastapi.io',
+      'https://eth-sepolia.blastapi.io',
+    ],
+    []
+  );
+
+  // 临时重写 window.fetch：把指向上述域名的请求改写到 Infura
+  const overrideSdkFetchRpc = (replacementUrl: string) => {
+    const originalFetch = window.fetch.bind(window);
+    const shouldRewrite = (input: any): boolean => {
+      try {
+        if (typeof input === 'string') {
+          return OVERRIDE_TARGETS.some((t) => input.startsWith(t));
+        }
+        if (input instanceof URL) {
+          return OVERRIDE_TARGETS.some((t) => input.href.startsWith(t));
+        }
+        if (typeof input === 'object' && input?.url) {
+          // Request 或类 Request 对象
+          const url = typeof input.url === 'string' ? input.url : String(input.url);
+          return OVERRIDE_TARGETS.some((t) => url.startsWith(t));
+        }
+      } catch {
+        // ignore
+      }
+      return false;
+    };
+    (window as any).fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+      try {
+        if (shouldRewrite(input)) {
+          const newUrl = replacementUrl;
+          // 尽量保留原始 init
+          return originalFetch(newUrl, init as any);
+        }
+      } catch {
+        // 兜底走原始 fetch
+      }
+      return originalFetch(input as any, init as any);
+    };
+    // 返回恢复函数
+    return () => {
+      (window as any).fetch = originalFetch;
+    };
+  };
   const [ethSigner, setEthSigner] = useState<ethers.Signer | null>(null);
   const contract = useMemo(() => {
     if (!ethSigner) return null;
@@ -217,7 +265,42 @@ export function PredictionList() {
         
         console.log('🔐 [主线程] 创建 FHE 实例...');
         const instanceStart = Date.now();
-        const fheInstance = await createInstance(SepoliaConfig);
+        // 强制覆盖 SDK 默认的 RPC，避免使用不支持 CORS 的公共 Blast 端点
+        const infuraRpc = SEPOLIA_RPC_URL;
+        const mergedConfig: any = {
+          ...SepoliaConfig,
+          // 常见字段名覆盖
+          networkUrl: infuraRpc,
+          rpcUrl: infuraRpc,
+          network: infuraRpc,
+          // 深层可能存在的配置对象
+          urls: {
+            ...(SepoliaConfig as any)?.urls,
+            default: infuraRpc,
+            public: infuraRpc,
+            rpc: [infuraRpc],
+          },
+          networkConfig: {
+            ...(SepoliaConfig as any)?.networkConfig,
+            urls: {
+              ...((SepoliaConfig as any)?.networkConfig?.urls ?? {}),
+              default: infuraRpc,
+              public: infuraRpc,
+              rpc: [infuraRpc],
+            },
+          },
+          nodeConfig: {
+            ...((SepoliaConfig as any)?.nodeConfig ?? {}),
+            url: infuraRpc,
+          },
+        };
+        const restoreFetch = overrideSdkFetchRpc(infuraRpc);
+        let fheInstance: any;
+        try {
+          fheInstance = await createInstance(mergedConfig);
+        } finally {
+          restoreFetch();
+        }
         console.log(`✅ [主线程] FHE 实例创建完成，耗时: ${Date.now() - instanceStart}ms`);
         
         setInstance(fheInstance);

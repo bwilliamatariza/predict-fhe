@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import { SEPOLIA_RPC_URL } from '../config/network';
 
 const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111 in hex
 const SEPOLIA_CHAIN_NAME = 'Sepolia Testnet';
-const SEPOLIA_RPC_URL = 'https://sepolia.infura.io/v3/';
 
 export interface WalletState {
   account: string | null;
